@@ -19,14 +19,14 @@ exports.auth = (req, res, next) => {
 }
 exports.isAuth = (req, res, next) => {
     if (!req.user) {
-        return res.redirect('/login')
+        return res.status(401).send('You need to login!')
     }
     next()
 
 }
 exports.isGuest = (req, res, next) => {
     if (req.user) {
-        return res.redirect('/')
+        
     }
     next()
 

@@ -21,16 +21,16 @@ app.use(express.static('public'));
 //HomePage============================
 app.get('/', async (req, res) => {
 
-    const homes = await homeResultService.lasted3HomesLeaned().lean();
+    //const homes = await homeResultService.lasted3HomesLeaned().lean();
 
-    res.render('home', { homes });
+    res.send('Test');
 });
 //Login================================
-app.get('/login', isGuest, (req, res) => {
-    res.render('login');
+app.get('/login',  (req, res) => {
+    res.send('login with post');
 });
 
-app.post('/login', isGuest, async (req, res) => {
+app.post('/login',  async (req, res) => {
 
     try {
         const { username, password } = req.body;
@@ -38,25 +38,25 @@ app.post('/login', isGuest, async (req, res) => {
             const user = await authService.login(username, password)
             const token = await authService.createToken(user)
 
-            res.cookie('user', token, { httpOnly: true })
-            res.redirect('/')
+            //res.cookie('user', token, { httpOnly: true })
+           res.send(token)
         }
         else {
             const error = 'Username and Password are required'
-            return res.render('login', { error: error.message })
+            return res.send( { error: error.message })
         }
     } catch (error) {
 
-        return res.render('login', { error: error.message })
+        return res.send({ error: error.message })
     }
 
 
 });
 //Register=============================
-app.get('/register', isGuest, (req, res) => {
+app.get('/register',  (req, res) => {
     res.render('register');
 });
-app.post('/register', isGuest, async (req, res) => {
+app.post('/register',  async (req, res) => {
     let { username, password, rePassword, name } = req.body;
     if (username && password && rePassword && name) {
         let data = name.split(' ');
@@ -74,7 +74,7 @@ app.post('/register', isGuest, async (req, res) => {
         name = nameCapitalized + " " + lastNameCapitalized
 
         if (password !== rePassword) {
-            return res.render('register', { error: 'Password mismatch' })
+            return res.rennder('register', { error: 'Password mismatch' })
         }
         try {
             const createdUser = await authService.create({ username, password, name })
@@ -220,7 +220,7 @@ app.get('/search', isAuth, (req, res) => {
 //404 for unkown pages=================
 app.use(notFound)
 //Listen on port 3000=================
-app.listen(3000, () => console.log('Server started...'))
+app.listen(3000, () => console.log('Server started http://localhost:3000...'))
 
 //Database==============================
 DbInitialize();
