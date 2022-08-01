@@ -33,7 +33,9 @@ app.get('/login',  (req, res) => {
 app.post('/login',  async (req, res) => {
 
     try {
+        
         const { username, password } = req.body;
+        console.log(req)
         if (username && password) {
             const user = await authService.login(username, password)
             const token = await authService.createToken(user)
