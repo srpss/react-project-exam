@@ -1,20 +1,19 @@
-import Catalog from "./components/Catalog";
-import NavScrollExample from "./components/Nav";
-import { Route, Routes } from "react-router-dom"
+
+import { Routes ,Route} from 'react-router-dom';
+import Catalog from './components/Catalog';
+import Nav from './components/Nav';
+
+import './style.css';
+
 function App() {
   return (
-    <>
-    <NavScrollExample/>
-    <Routes>
-    <div className="main">
-    <Route path="/start" element={<Catalog />} />
-    
-    </div>
-      
+ 
+ <div className="main">
+   <Nav></Nav>
+   <Routes>
+      <Route path="/" element={<Catalog />} />
     </Routes>
-      
-     
-    </>
+ </div>
   );
 }
 
