@@ -1,0 +1,64 @@
+.main {
+    position: relative;
+    background-color: #bbb;
+    position: fixed;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-top: 0px;
+    border: 0px;
+    padding: 0px;
+   
+    width: 100%;
+    left: 0;
+    padding-bottom: 10000px;
+
+}
+
+.nav {
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightskyblue;
+    position: relative;
+    border-top: 0px;
+    border: 0px;
+    padding: 0px;
+    top: 0;
+    width: 100%;
+    left: 0;
+
+}
+
+
+li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: darkgrey;
+
+    transition-delay: 100ms;
+    transition-duration: 100ms;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+
+body {
+    background-color: lightskyblue;
+
+}
