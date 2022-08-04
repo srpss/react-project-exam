@@ -12,11 +12,13 @@ app.use(cors(corsOptions));
 
 // parse requests of content-type - application/json
 app.use(express.json());
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
@@ -51,6 +53,15 @@ app.get('/boards', async (req, res) => {
  
 });
 
+app.get('/myBoards/:_id', async (req, res) => {
+  const boards = await boardsService.getByUserId(req.params._id).lean();
+  
+  res.json(boards );
+
+ 
+});
+
+
 app.post('/boards', async (req, res) => {
   try {
   let data = req.body
@@ -61,6 +72,8 @@ app.post('/boards', async (req, res) => {
   }
   
 });
+
+
 
 
 // routes

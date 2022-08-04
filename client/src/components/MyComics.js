@@ -1,6 +1,25 @@
-import React from 'react'
+import {React,useState,useEffect} from 'react'
+
+import * as boardService from '../services/board';
+import Board from './Board';
+
+
 export default function MyComics() {
+  const [boards, setBoards] = useState([]);
+//neeed to give user id here
+  useEffect(() => {
+    
+    boardService.getAll()
+        .then(result => {
+            
+            setBoards(result);
+        });
+}, []);
+
+  
   return (
-    <div>MyComics</div>
+    boards.map(b => <Board board ={b}></Board>
+    )
+    
   )
 }

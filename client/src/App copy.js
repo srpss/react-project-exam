@@ -1,7 +1,7 @@
 
-//import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes ,Route} from 'react-router-dom';
-
+import * as boardService from './services/board';
 import Catalog from './components/Catalog';
 import Create from './components/Create';
 import Login from './components/Login';
@@ -15,13 +15,23 @@ import './style.css';
 function App() {
 
   
+  const [boards, setBoards] = useState([]);
+
+  useEffect(() => {
+    
+    boardService.getAll()
+        .then(result => {
+            
+            setBoards(result);
+        });
+}, []);
 
   return (
  
  <div className="main">
    <Nav />
    <Routes>
-      <Route path="/" element={<Catalog />} />
+      <Route path="/" element={<Catalog boards = {boards}/>} />
       <Route path="/my-board" element={<MyComics />}/>
       <Route path="/create-new" element={<Create />}/>
       <Route path="/login" element={<Login />}/>
