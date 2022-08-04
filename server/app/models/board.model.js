@@ -9,6 +9,11 @@ const Board = mongoose.model(
     },
     description: {type: String},
     date: {type: Date},
+    owner:{
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
   })
 );
 

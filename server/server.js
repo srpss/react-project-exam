@@ -44,32 +44,16 @@ app.get('/boards', async (req, res) => {
   
   res.json(boards );
 
-  let data = req.body
-  try {
-
-      let check = (data.homeImage.slice(0, 8) == 'https://')
-      let check2 = (data.homeImage.slice(0, 7) == 'http://')
-
-      if (check == false && check2 == false) {
-          throw { message: "image should start with http:// or https://" }
-      }
-
-      data.owner = req.user._id
-     
-      res.redirect('/housing-for-rent');
-  } catch (error) {
-      res.render('create', { error: error.message, data });
-  }
+ 
 });
 
 app.post('/boards', async (req, res) => {
   try {
-    let data = req.body
-    data.owner = req.body._id
+  let data = req.body
   const boards = await boardsService.create(data);
   res.status(201).json(  boards );
   } catch (error) {
-    
+    res.status(500).json(  {error: error.message} );
   }
   
 });
