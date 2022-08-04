@@ -1,6 +1,9 @@
 import React from 'react'
-export default function Catalog() {
+export default function Catalog({boards}) {
+
+  
   return (
-    <div>Catalog</div>
+    boards.map(b => <div key={b._id} >{b.originalPoster}</div>)
+    
   )
 }
