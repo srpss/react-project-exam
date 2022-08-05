@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
 });
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 const db = require("./app/models");
 const boardsService = require("./board-service/board");
@@ -84,22 +84,16 @@ app.get('/boards/:_id', async (req, res) => {
 });
 
 
-app.get('/myBoards/:_id', async (req, res) => {
-  const boards = await boardsService.getByUserId(req.params._id).lean();
-  
-  res.json(boards );
-
- 
-});
-
-
 app.post('/boards', async (req, res) => {
   try {
+    
   let data = req.body
+  
   const boards = await boardsService.create(data);
   res.status(201).json(  boards );
   } catch (error) {
     res.status(500).json(  {error: error.message} );
+    
   }
   
 });

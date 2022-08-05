@@ -1,4 +1,4 @@
-//const axios = require('axios');
+const axios = require('axios');
 const baseUrl = 'http://localhost:8080';
 
 export const getAll = () => {
@@ -13,4 +13,10 @@ export const deleteOne = (id) => {
 export const getOne = (id) => {
     return fetch(`${baseUrl}/boards/${id}`)
         .then(res => res.json())
+};
+export const create =  (data) => {
+   
+
+    return  fetch(`${baseUrl}/boards`,{method:"post",body:JSON.stringify(data)})
+       .then(res => res.json())
 };

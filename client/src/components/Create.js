@@ -1,12 +1,14 @@
 import React from 'react'
+import * as boardService from '../services/board';
 
 export default function Create() {
   const onSubmit = (e) => {
     e.preventDefault();
 
     const boardData = Object.fromEntries(new FormData(e.target));
-
-    console.log(boardData);
+    boardData.owner = "test"
+    boardData.date = new Date();
+    boardService.create(boardData)
 
 
   };
@@ -16,18 +18,18 @@ export default function Create() {
       <form id="create" onSubmit={onSubmit}>
         <div className="container">
           <h1>Create board thread</h1>
-          <label htmlFor="leg-title">Board original post:</label>
+          <label htmlFor="originalPoster">Board original post:</label>
           <input
             type="text"
-            id="oTest"
-            name="oTest"
+            id="originalPoster"
+            name="originalPoster"
             placeholder="How it will start"
           ></input>
-          <label htmlFor="single-img">Image:</label>
+          <label htmlFor="image">Image:</label>
           <input
             type="text"
-            id="single-img"
-            name="single-img"
+            id="image"
+            name="image"
             placeholder="Image URL https:/...png"
           />
           <input
