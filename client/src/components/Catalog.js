@@ -19,7 +19,7 @@ export default function Catalog() {
 
   
   return (
-    boards.map(b => <Board board ={b}></Board>
+    boards.map(b => <Board key={b._id} board ={b}></Board>
     )
     
   )

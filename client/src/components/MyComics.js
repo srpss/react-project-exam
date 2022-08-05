@@ -18,7 +18,7 @@ export default function MyComics() {
 
   
   return (
-    boards.map(b => <Board board ={b}></Board>
+    boards.map(b => <Board Board key={b._id} board ={b}></Board>
     )
     
   )
