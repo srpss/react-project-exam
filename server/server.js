@@ -46,9 +46,14 @@ app.get("/", (req, res) => {
 });
 
 app.get('/boards', async (req, res) => {
-  const boards = await boardsService.getAll().lean();
+  try {
+    const boards = await boardsService.getAll().lean();
   
   res.json(boards );
+  } catch (error) {
+    res.json({error: error.message})
+  }
+  
 
  
 });
@@ -57,18 +62,23 @@ app.post('/boards/delete/:_id', async (req, res) => {
   try {
     const boards = await boardsService.removeOne(req.params._id)
   
-    res.json("Board was deleted");
+    res.json(`Board was deleted ${boards}`);
   } catch (error) {
-    res.json({error: error.message})
+   
   }
   
  
 });
 
 app.get('/boards/:_id', async (req, res) => {
-  const board = await boardsService.getOne(req.params._id).lean();
+  try {
+    const board = await boardsService.getOne(req.params._id).lean();
   
-  res.json(board );
+    res.json(board );
+  } catch (error) {
+    res.json({error: error.message})
+  }
+ 
 
  
 });

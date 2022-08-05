@@ -10,3 +10,7 @@ export const deleteOne = (id) => {
         .then(res => console.log(res.json()))
         
 };
+export const getOne = (id) => {
+    return fetch(`${baseUrl}/boards/${id}`)
+        .then(res => res.json())
+};
