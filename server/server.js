@@ -53,6 +53,27 @@ app.get('/boards', async (req, res) => {
  
 });
 
+app.post('/boards/delete/:_id', async (req, res) => {
+  try {
+    const boards = await boardsService.removeOne(req.params._id)
+  
+    res.json("Board was deleted");
+  } catch (error) {
+    res.json({error: error.message})
+  }
+  
+ 
+});
+
+app.get('/boards/:_id', async (req, res) => {
+  const board = await boardsService.getOne(req.params._id).lean();
+  
+  res.json(board );
+
+ 
+});
+
+
 app.get('/myBoards/:_id', async (req, res) => {
   const boards = await boardsService.getByUserId(req.params._id).lean();
   
