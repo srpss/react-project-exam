@@ -8,12 +8,13 @@ const Board = mongoose.model(
         required: true
     },
     image: {type: String},
-    date: {type: Date, required: true},
+    
     owner:{
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
     },
+    date: {type: Date, required: true},
   })
 );
 

@@ -6,7 +6,7 @@ export default function Create() {
     e.preventDefault();
 
     const boardData = Object.fromEntries(new FormData(e.target));
-    boardData.owner = "test"
+    boardData.owner = "62eb9e77d8f6e52c30f6c3ee"
     boardData.date = new Date();
     boardService.create(boardData)
 
