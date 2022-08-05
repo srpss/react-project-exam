@@ -9,4 +9,5 @@ exports.removeOne = (id) => Board.deleteOne({_id: id})
 exports.update = (id, data) => Board.updateOne({_id: id}, {$set: data}, {runValidators: true})
 exports.create = async (data) =>{
     const board = await Board.create(data)
+    return board
 } 

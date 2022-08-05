@@ -1,16 +1,22 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import * as boardService from '../services/board';
 
 export default function Create() {
-  const onSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const boardData = Object.fromEntries(new FormData(e.target));
     boardData.owner = "62eb9e77d8f6e52c30f6c3ee"
     boardData.date = new Date();
-    boardService.create(boardData)
-
-
+    try {
+      const id = await boardService.create(boardData)
+      navigate(`/boards/${id}`);
+    } catch (error) {
+      console.log({error:error.message})
+    }
   };
 
   return (

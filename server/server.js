@@ -96,7 +96,8 @@ app.post('/boards', async (req, res) => {
   let data = req.body
   
   const boards = await boardsService.create(data);
-  res.status(201).json(  boards );
+
+  res.status(201).json(  boards._id );
   } catch (error) {
     res.status(500).json(  {error: error.message} );
     

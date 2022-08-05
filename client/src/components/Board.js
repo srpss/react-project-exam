@@ -11,7 +11,7 @@ export default function Board({board,  deleting}) {
         navigate(`/boards/${board._id}`);
     }
 
-
+  
     function deleteExecute (){
         deleting(board._id)
     } 
