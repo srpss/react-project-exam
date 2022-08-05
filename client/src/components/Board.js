@@ -3,7 +3,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Board({board}) {
+export default function Board({board,  deleting}) {
     
     const navigate = useNavigate();
 
@@ -15,17 +15,17 @@ export default function Board({board}) {
         navigate(`/boards/edit/${board._id}`);
 
     }
-    function deleting(e){
-        e.preventDefault();
-
-    }
+    function deleteExecute (){
+        deleting(board._id)
+    } 
+    
     return (
         <div  className='boardCard'>
             <div  >{board.originalPoster}</div>
             <div  >{board._id}</div>
             <button onClick={details}>Details</button>
             <button onClick={edit}>Edit</button>
-            <button onClick={deleting}>Delete</button>
+            <button onClick={deleteExecute}>Delete</button>
         </div>
     )
 }

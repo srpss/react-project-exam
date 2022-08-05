@@ -2,11 +2,12 @@ import { React, useState, useEffect } from 'react'
 
 import * as boardService from '../services/board';
 import Board from './Board';
+import { deleteOne } from '../services/board';
 
 
 export default function Catalog() {
 
-  const [boards, setBoards] = useState([]);
+  let [boards, setBoards] = useState([]);
 
   useEffect(() => {
 
@@ -17,12 +18,17 @@ export default function Catalog() {
       });
   }, []);
 
-
+  const deleting= async (id) => {
+    await deleteOne(id)
+    let newboards= boards.filter(x => !(x._id === id))
+  
+    setBoards(newboards) 
+}
   return (
     <>
       {
         boards.length > 0
-          ? boards.map(b => <Board key={b._id} board={b}></Board>)
+          ? boards.map(b => <Board key={b._id} board={b} deleting={deleting}></Board>)
           : <div className="boards-do-not-exist">Create new boards</div>
       }
     </>

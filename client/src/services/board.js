@@ -6,6 +6,7 @@ export const getAll = () => {
         .then(res => res.json())
 };
 export const deleteOne = (id) => {
-    return fetch(`${baseUrl}/boards/delete/${id}`)
-        .then(res => res.json())
+    return fetch(`${baseUrl}/boards/delete/${id}`,{method:"post"})
+        .then(res => console.log(res.json()))
+        
 };
