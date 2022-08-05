@@ -19,16 +19,21 @@ export default function Create() {
           <label htmlFor="leg-title">Board original post:</label>
           <input
             type="text"
-            id="title"
-            name="title"
+            id="oTest"
+            name="oTest"
             placeholder="How it will start"
           ></input>
           <label htmlFor="single-img">Image:</label>
           <input
             type="text"
-            id="imageUrl"
-            name="imageUrl"
+            id="single-img"
+            name="single-img"
             placeholder="Image URL https:/...png"
+          />
+          <input
+            className="btn submit"
+            type="submit"
+            value="Create Game"
           />
         </div>
       </form>
