@@ -10,6 +10,7 @@ export default function Nav() {
             <li className="li"><Link to ="/login">Login</Link></li>
             <li className="li"><Link to ="/register">Register</Link></li>
             <li className="li"><Link to ="/logout">Logout</Link></li>
+            <li className="li"><Link to ="/profile">Profile</Link></li>
         </ul>
 </div>
     )

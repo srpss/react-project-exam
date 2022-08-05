@@ -10,15 +10,16 @@ import Details from './components/Details';
 import MyComics from './components/MyComics';
 import Nav from './components/Nav';
 import Register from './components/Register';
-
+import Profile from './components/Profile';
 import './style.css';
+
 
 function App() {
 
  
 
   return (
- 
+
  <div className="main">
    <Nav />
    <Routes>
@@ -29,6 +30,7 @@ function App() {
       <Route path="/login" element={<Login />}/>
       <Route path="/register" element={<Register />}/>
       <Route path="/logout" element={<Logout />}/>
+      <Route path="/profile" element={<Profile />}/>
     </Routes>
     
  </div>
