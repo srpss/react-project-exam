@@ -11,10 +11,7 @@ export default function Board({board,  deleting}) {
         navigate(`/boards/${board._id}`);
     }
 
-    const edit= () => {
-        navigate(`/boards/edit/${board._id}`);
 
-    }
     function deleteExecute (){
         deleting(board._id)
     } 
@@ -24,7 +21,6 @@ export default function Board({board,  deleting}) {
             <div  >{board.originalPoster}</div>
             <div  >{board._id}</div>
             <button onClick={details}>Details</button>
-            <button onClick={edit}>Edit</button>
             <button onClick={deleteExecute}>Delete</button>
         </div>
     )
