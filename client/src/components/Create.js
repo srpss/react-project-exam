@@ -20,7 +20,7 @@ export default function Create() {
   };
 
   return (
-    <section id="create-page" className="auth">
+    <section id="create-page" className="create">
       <form id="create" onSubmit={onSubmit}>
         <div className="container">
           <h1>Create board thread</h1>
