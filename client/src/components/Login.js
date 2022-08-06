@@ -10,11 +10,11 @@ export default function Login() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    
     const loginData = Object.fromEntries(new FormData(e.target));
     console.log(loginData)
     try {
-      await boardService.login(loginData)
+      const userData = await boardService.login(loginData)
       navigate(`/`);
     } catch (error) {
       console.log({error:error.message})
