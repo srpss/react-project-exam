@@ -1,4 +1,4 @@
-const axios = require('axios');
+//const axios = require('axios');
 const baseUrl = 'http://localhost:8080';
 
 export const getAll = () => {

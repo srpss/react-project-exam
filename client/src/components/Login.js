@@ -12,9 +12,10 @@ export default function Login() {
     e.preventDefault();
     
     const loginData = Object.fromEntries(new FormData(e.target));
-    console.log(loginData)
+    
     try {
       const userData = await boardService.login(loginData)
+      console.log(userData)
       navigate(`/`);
     } catch (error) {
       console.log({error:error.message})

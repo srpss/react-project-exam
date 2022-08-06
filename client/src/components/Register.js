@@ -12,10 +12,11 @@ export default function Register() {
     e.preventDefault();
     
     const registerData = Object.fromEntries(new FormData(e.target));
-    console.log(registerData)
+    
     try {
-      const userData = await boardService.register(registerData)
-      navigate(`/`);
+      await boardService.register(registerData)
+      
+      navigate(`/login`);
     } catch (error) {
       console.log({error:error.message})
     }
