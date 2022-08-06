@@ -11,10 +11,10 @@ export default function Register() {
   const onSubmit = async (e) => {
     e.preventDefault();
     
-    const loginData = Object.fromEntries(new FormData(e.target));
-    console.log(loginData)
+    const registerData = Object.fromEntries(new FormData(e.target));
+    console.log(registerData)
     try {
-      const userData = await boardService.login(loginData)
+      const userData = await boardService.register(registerData)
       navigate(`/`);
     } catch (error) {
       console.log({error:error.message})
@@ -23,9 +23,9 @@ export default function Register() {
 
   return (
     <section className="create">
-      <form id="login"  onSubmit={onSubmit}>
+      <form id="register"  onSubmit={onSubmit}>
         <div>
-          <h1>Login</h1>
+          <h1>Register</h1>
           <label htmlFor="username">Username:</label>
           <input
             type="username"
@@ -37,7 +37,7 @@ export default function Register() {
           <input type="password" id="password" name="password" />
           <input type="submit" className="btn submit" defaultValue="Login" />
           <p>
-            Need to register? - <Link to="/register">Register</Link>
+           Already have an account? - <Link to="/login">Register</Link>
           </p>
         </div>
       </form>

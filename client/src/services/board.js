@@ -25,3 +25,8 @@ export const login =  (data) => {
     return  fetch(`${baseUrl}/api/auth/signin`,{method:"post",mode: 'cors',headers: {'Content-Type': 'application/json' },body:JSON.stringify(data)})
        .then(res => res.json())
 };
+
+export const register =  (data) => {
+    return  fetch(`${baseUrl}/api/auth/signup`,{method:"post",mode: 'cors',headers: {'Content-Type': 'application/json' },body:JSON.stringify(data)})
+       .then(res => res.json())
+};
