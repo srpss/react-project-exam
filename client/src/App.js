@@ -22,7 +22,7 @@ import RedirectHome from './components/RedirectHome';
 
 function App() {
 
-  const [auth, setAuth] = useLocalStorage('auth', {});
+  const [auth, setAuth] = useLocalStorage('user', {});
 
   const userLogin = (authData) => {
     setAuth(authData);

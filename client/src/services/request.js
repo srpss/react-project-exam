@@ -1,6 +1,6 @@
 const request = async (method, url, data) => {
     try {
-        const user = localStorage.getItem('auth');
+        const user = localStorage.getItem('user');
         const auth = JSON.parse(user || '{}');
 
         let headers = {}
@@ -19,7 +19,7 @@ const request = async (method, url, data) => {
                 mode: 'cors',
                 headers: {
                     ...headers,
-                    'content-type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             });

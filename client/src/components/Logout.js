@@ -8,7 +8,7 @@ export default function Logout() {
 
     const navigate = useNavigate();
     const { user, userLogout } = useContext(Context);
-    console.log(user)
+
     useEffect(() => {
         userLogout();
         navigate('/');
