@@ -9,13 +9,13 @@ export default function Nav() {
 <div className='nav'>
         <ul className="nav">
             <li className="li"><Link to ="/">Catalog</Link></li>
-            {user.user.accessToken?<li className="li"><Link to ="/my-board">My Comics</Link></li>:""}       
-            {user.user.accessToken?<li className="li"><Link to ="/create-new">Create</Link></li>:""} 
-            {!user.user.accessToken?<li className="li"><Link to ="/login">Login</Link></li>:""}
-            {!user.user.accessToken?<li className="li"><Link to ="/register">Register</Link></li>:""}   
-            {user.user.accessToken?<li className="li"><Link to ="/profile">Profile</Link></li>:""}            
-            {user.user.accessToken?<li className="li"><Link to ="/logout">Logout</Link></li>:""}
-            
+            {user?.user.accessToken?<li className="li"><Link to ="/my-board">My Comics</Link></li>:""}       
+            {user?.user.accessToken?<li className="li"><Link to ="/create-new">Create</Link></li>:""} 
+            {!user?.user.accessToken?<li className="li"><Link to ="/login">Login</Link></li>:""}
+            {!user?.user.accessToken?<li className="li"><Link to ="/register">Register</Link></li>:""}   
+            {user?.user.accessToken?<li className="li"><Link to ="/profile">Profile</Link></li>:""}            
+            {user?.user.accessToken?<li className="li"><Link to ="/logout">Logout</Link></li>:""}
+            {user?.user.accessToken?<li className="li"><div>{user.user.username}</div></li>:""}  
         </ul>
 </div>
     )
