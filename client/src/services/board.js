@@ -1,32 +1,17 @@
 //const axios = require('axios');
+import * as request from "./request";
 const baseUrl = 'http://localhost:8080';
 
-export const getAll = () => {
-    return fetch(`${baseUrl}/boards`)
-        .then(res => res.json())
-};
-export const deleteOne = (id) => {
-    return fetch(`${baseUrl}/boards/delete/${id}`,{method:"post"})
-        .then(res => console.log(res.json()))
-        
-};
-export const getOne = (id) => {
-    return fetch(`${baseUrl}/boards/${id}`)
-        .then(res => res.json())
-};
-export const create =  (data) => {
+
+export const getAll = () => request.get(`${baseUrl}/boards`)
+    
+
+export const deleteOne = (id) => request.post(`${baseUrl}/boards/delete/${id}`)
+
+export const getOne = (id) => request.get(`${baseUrl}/boards/${id}`)
+
+export const create =  (data) => request.post(`${baseUrl}/boards`, data)
    
+export const login =  (data) => request.post(`${baseUrl}/api/auth/signin`,data)
 
-    return  fetch(`${baseUrl}/boards`,{method:"post",mode: 'cors',headers: {'Content-Type': 'application/json' },body:JSON.stringify(data)})
-       .then(res => res.json())
-};
-
-export const login =  (data) => {
-    return  fetch(`${baseUrl}/api/auth/signin`,{method:"post",mode: 'cors',headers: {'Content-Type': 'application/json' },body:JSON.stringify(data)})
-       .then(res => res.json())
-};
-
-export const register =  (data) => {
-    return  fetch(`${baseUrl}/api/auth/signup`,{method:"post",mode: 'cors',headers: {'Content-Type': 'application/json' },body:JSON.stringify(data)})
-       .then(res => res.json())
-};
+export const register =  (data) => request.post(`${baseUrl}/api/auth/signup`, data)

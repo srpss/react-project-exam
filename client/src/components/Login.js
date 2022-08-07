@@ -1,21 +1,26 @@
 import React from 'react'
+import { useContext } from 'react';
+import { Context } from './context/Context';
+
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import * as boardService from '../services/board';
 
 
+
 export default function Login() {
+  const { userLogin } = useContext(Context);
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    
+  
     const loginData = Object.fromEntries(new FormData(e.target));
     
     try {
       const userData = await boardService.login(loginData)
-      console.log(userData)
+      userLogin(userData)
       navigate(`/`);
     } catch (error) {
       console.log({error:error.message})
