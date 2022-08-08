@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { Context } from './context/Context';
 
 export default function Logout() {
-
     const navigate = useNavigate();
-    const { user, userLogout } = useContext(Context);
+    const { userLogout } = useContext(Context);
 
-    useEffect(() => {
+   
+    useEffect(() => { 
         userLogout();
         navigate('/');
     },[])
