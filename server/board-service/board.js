@@ -1,4 +1,5 @@
 const Board = require("../app/models/board.model");
+const User = require("../app/models/user.model");
 
 
 exports.lasted3HomesLeaned = () => Board.find().sort({_id: -1}).limit(3);
@@ -12,3 +13,5 @@ exports.create = async (data) =>{
     const board = await Board.create(data)
     return board
 } 
+
+exports.getUser = (id) => User.find({_id: id});
