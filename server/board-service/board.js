@@ -15,3 +15,4 @@ exports.create = async (data) =>{
 } 
 
 exports.getUser = (id) => User.find({_id: id});
+exports.updateUser = (id, data) => User.updateOne({_id: id}, {$set: data}, {runValidators: true})

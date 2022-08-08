@@ -84,19 +84,31 @@ app.get('/user/:id', [authJwt.verifyToken], async (req, res) => {
   }
 });
 
-app.get('/my-user/:id', async (req, res) => {
+app.post('/user/:id', [authJwt.verifyToken], async (req, res) => {
   const id = req.params.id
+  const data = req.body
   try {
-    const boards = await boardsService.getMyUser(id).lean();
+    const user = await boardsService.updateUser(id, data).lean();
   
-    res.json(boards );
+    res.json(user );
   } catch (error) {
     res.json({error: error.message})
   }
+});
+
+// app.get('/my-user/:id', async (req, res) => {
+//   const id = req.params.id
+//   try {
+//     const boards = await boardsService.getMyUser(id).lean();
+  
+//     res.json(boards );
+//   } catch (error) {
+//     res.json({error: error.message})
+//   }
   
 
  
-});
+// });
 
 app.post('/boards/delete/:_id', async (req, res) => {
   try {
