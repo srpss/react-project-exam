@@ -76,7 +76,7 @@ export default function Profile() {
     <input
       className="btn submit"
       type="submit"
-      value="Change them"
+      value="Change password"
     />
   </div>
 </form>
