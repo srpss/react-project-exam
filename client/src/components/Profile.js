@@ -7,9 +7,7 @@ export default function Profile() {
  
 
   const { user , userLogin} = useContext(Context);
-  console.log(user)
 
-  
   useEffect(() =>{
     getUser(user.id)
   }, [user])
@@ -21,7 +19,11 @@ export default function Profile() {
     try {
       const profileData = Object.fromEntries(new FormData(e.target));
       updateUser(user.id, profileData)
-      //update user data
+      
+      let newState = JSON.parse(JSON.stringify(user))
+      newState.username = profileData.username
+      newState.image = profileData.image
+      userLogin(newState)
       //add change password
       
     } catch (error) {
@@ -32,7 +34,7 @@ export default function Profile() {
   return (
     <div>
     <section id="profile-page" className="profile">
-      <img src={user.image} alt="UserImg" width="90" height="90"></img>
+      <img src={user.image} alt="UserImg" width="200" height="200"></img>
       <form id="profile" onSubmit={onSubmit}>
         <div className="container">
           <h1>User details</h1>
@@ -42,7 +44,8 @@ export default function Profile() {
             id="username"
             name="username"
             placeholder={user.username}
-            value= {user.username}
+          defaultValue= {user.username}
+        
           ></input>
           <label htmlFor="image">Image:</label>
           <input
@@ -50,7 +53,8 @@ export default function Profile() {
             id="image"
             name="image"
             placeholder={user.image}
-            value= {user.image}
+            defaultValue= {user.image}
+           
           />
           <input
             className="btn submit"
