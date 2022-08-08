@@ -30,6 +30,7 @@ app.use(function(req, res, next) {
 
 const db = require("./app/models");
 const boardsService = require("./board-service/board");
+const { authJwt } = require("./app/middlewares");
 const Role = db.role;
 
 db.mongoose
@@ -60,6 +61,32 @@ app.get('/boards', async (req, res) => {
     res.json({error: error.message})
   }
   
+});
+
+app.get('/myboards/:id', [authJwt.verifyToken], async (req, res) => {
+  const id = req.params.id
+  try {
+    const boards = await boardsService.getMy(id).lean();
+  
+    res.json(boards );
+  } catch (error) {
+    res.json({error: error.message})
+  }
+  
+
+ 
+});
+
+app.get('/my-user/:id', async (req, res) => {
+  const id = req.params.id
+  try {
+    const boards = await boardsService.getMyUser(id).lean();
+  
+    res.json(boards );
+  } catch (error) {
+    res.json({error: error.message})
+  }
+  
 
  
 });
@@ -70,7 +97,7 @@ app.post('/boards/delete/:_id', async (req, res) => {
   
     res.json(`Board was deleted ${boards}`);
   } catch (error) {
-   
+    res.json({error: error.message})
   }
   
  

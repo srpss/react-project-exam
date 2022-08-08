@@ -1,15 +1,20 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from './context/Context';
+
 import * as boardService from '../services/board';
+
 
 export default function Create() {
   const navigate = useNavigate();
-
+  const { user } = useContext(Context);
+  const id = user.id
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const boardData = Object.fromEntries(new FormData(e.target));
-    boardData.owner = "62eb9e77d8f6e52c30f6c3ee"
+    boardData.owner = id
     boardData.date = new Date();
     try {
       const id = await boardService.create(boardData)

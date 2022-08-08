@@ -5,7 +5,8 @@ const baseUrl = 'http://localhost:8080';
 
 export const getAll = () => request.get(`${baseUrl}/boards`)
     
-
+export const getMy = (_id) => request.get(`${baseUrl}/myboards/${_id}`)
+    
 export const deleteOne = (id) => request.post(`${baseUrl}/boards/delete/${id}`)
 
 export const getOne = (id) => request.get(`${baseUrl}/boards/${id}`)
