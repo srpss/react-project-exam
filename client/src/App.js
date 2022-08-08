@@ -39,7 +39,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Catalog />} />
           <Route path="/boards/:id" element={<Details />} />
-          {auth.accessToken ? <Route path="/my-board" element={<MyComics />} /> : <Route path="/not-found" element={<NotFound />} />}
+          {auth.accessToken ? <Route path="/my-boards" element={<MyComics />} /> : <Route path="/not-found" element={<NotFound />} />}
           {auth.accessToken ? <Route path="/create-new" element={<Create />} /> : <Route path="/not-found" element={<NotFound />} />}
           {!auth.accessToken ? <Route path="/login" element={<Login />} /> : <Route path="/" element={<RedirectHome />} />}
           {!auth.accessToken ? <Route path="/register" element={<Register />} /> : <Route path="/" element={<RedirectHome />} />}

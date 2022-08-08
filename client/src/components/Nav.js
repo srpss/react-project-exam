@@ -9,7 +9,7 @@ export default function Nav() {
 <div className='nav'>
         <ul className="nav">
             <li className="li"><Link to ="/">Catalog</Link></li>
-            {user?.accessToken?<li className="li"><Link to ="/my-board">My Comics</Link></li>:""}       
+            {user?.accessToken?<li className="li"><Link to ="/my-boards">My Boards</Link></li>:""}       
             {user?.accessToken?<li className="li"><Link to ="/create-new">Create</Link></li>:""} 
             {!user?.accessToken?<li className="li"><Link to ="/login">Login</Link></li>:""}
             {!user?.accessToken?<li className="li"><Link to ="/register">Register</Link></li>:""}   
