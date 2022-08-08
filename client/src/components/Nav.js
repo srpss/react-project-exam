@@ -15,7 +15,7 @@ export default function Nav() {
             {!user?.user.accessToken?<li className="li"><Link to ="/register">Register</Link></li>:""}   
             {user?.user.accessToken?<li className="li"><Link to ="/profile">Profile</Link></li>:""}            
             {user?.user.accessToken?<li className="li"><Link to ="/logout">Logout</Link></li>:""}
-            {user?.user.accessToken?<li className="li"><div>{user.user.username}</div></li>:""}  
+            {user?.user.accessToken?<div><li className="li"><div className='navUsername'>{user.user.username}</div> </li><li><img src={user.user.image} alt="UserImg" width="45" height="45"></img></li></div>:""}  
         </ul>
 </div>
     )
