@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react'
 
 import * as boardService from '../services/board';
-import Board from './Board';
+import BoardDetails from './BoardDetails';
 import { deleteOne } from '../services/board';
 import { useParams, useNavigate } from 'react-router-dom';
 
@@ -39,7 +39,7 @@ export default function Details() {
       {
 
         boards
-          ? <Board key={boards._id} board={boards} deleting={deleting}></Board>
+          ? <BoardDetails key={boards._id} board={boards} deleting={deleting}></BoardDetails>
           : <div className="boards-do-not-exist">Does not exist</div>
       }
     </div>
