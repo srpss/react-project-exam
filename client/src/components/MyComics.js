@@ -29,8 +29,8 @@ const deleting= async (id) => {
   setBoards(newboards) 
 }
   return (
-    boards.map(b => <Board Board key={b._id} board ={b} deleting={deleting}></Board>
-    )
-    
+    <ul>
+    {boards.map(b => <Board Board key={b._id} board ={b} deleting={deleting}></Board>)}
+    </ul>
   )
 }

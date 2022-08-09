@@ -74,7 +74,7 @@ app.get('/myboards/:id', [authJwt.verifyToken], async (req, res) => {
   }
 });
 
-app.get('/user/:id', [authJwt.verifyToken], async (req, res) => {
+app.get('/user/:id', async (req, res) => {
   const id = req.params.id
   try {
     const user = await boardsService.getUser(id).lean();
