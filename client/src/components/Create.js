@@ -29,7 +29,7 @@ export default function Create() {
       <form id="create" onSubmit={onSubmit}>
         <div className="container">
           <h1>Create board thread</h1>
-          <label htmlFor="originalPoster">Board original post:</label>
+          <label htmlFor="originalPoster">First post:</label>
           <input
             type="text"
             id="originalPoster"

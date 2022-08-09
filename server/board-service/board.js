@@ -1,6 +1,6 @@
 const Board = require("../app/models/board.model");
 const User = require("../app/models/user.model");
-
+const bcrypt = require("bcryptjs");
 
 exports.lasted3HomesLeaned = () => Board.find().sort({_id: -1}).limit(3);
 exports.getMy = (id) => Board.find({owner: id});
@@ -15,4 +15,12 @@ exports.create = async (data) =>{
 } 
 
 exports.getUser = (id) => User.find({_id: id});
+
 exports.updateUser = (id, data) => User.updateOne({_id: id}, {$set: data}, {runValidators: true})
+
+exports.updatePass = (id, data) => {
+    const password = bcrypt.hashSync(data.password, 8)
+    data = {password: password}
+    return User.updateOne({_id: id}, {$set: data}, {runValidators: true})
+     
+}

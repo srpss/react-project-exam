@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useContext } from 'react';
-import { getUser, updateUser } from '../services/board';
+import { getUser, updateUser, updatePass } from '../services/board';
 import { Context } from './context/Context';
 
 export default function Profile() {
@@ -25,6 +25,20 @@ export default function Profile() {
       newState.image = profileData.image
       userLogin(newState)
       //add change password
+      
+    } catch (error) {
+      console.log({error:error.message})
+    }
+  };
+
+  const onSubmitPassword = async (e) => {
+    e.preventDefault();
+
+   
+    try {
+      const passwordData = Object.fromEntries(new FormData(e.target));
+      updatePass(user.id, passwordData)
+      console.log("it was changed successfully!")
       
     } catch (error) {
       console.log({error:error.message})
@@ -66,14 +80,14 @@ export default function Profile() {
     </section>
 
 <section id="profile-page" className="profile">
-<form id="profile" onSubmit={onSubmit}>
+<form id="profile" onSubmit={onSubmitPassword}>
   <div className="container">
     <h1>Password change</h1>
     <label htmlFor="password">Password:</label>
     <input
       type="text"
-      id="username"
-      name="username"
+      id="password"
+      name="password"
       placeholder='Add new password here'
   
     ></input>
