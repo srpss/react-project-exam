@@ -8,7 +8,7 @@ import { getUser } from '../services/board';
 export default function Board({ board, deleting }) {
     const { user } = useContext(Context)
     const navigate = useNavigate();
-    const [boardUser, setUser] = useState()
+    const [boardUser, setUser] = useState([])
     const details = () => {
         navigate(`/boards/${board._id}`);
     }
@@ -23,7 +23,7 @@ export default function Board({ board, deleting }) {
 
     return (
         <div className='boardCard'>
-            {boardUser?<div>Creator: {boardUser[0].username}</div>:<div>Loading...</div>}
+            {boardUser[0]?.username?<div>Creator: {boardUser[0].username}</div>:<div>Loading...</div>}
             <div  >ID: {board._id}</div>
             <div  >Last Update: {board.date}</div>
             {board.image !== ""?<img src={board.image} alt="boardImg" width="150" height="150"></img>:""}
