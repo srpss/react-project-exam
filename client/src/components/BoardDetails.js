@@ -15,7 +15,7 @@ export default function BoardDetails() {
 
     let { id } = useParams();
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         getOne(id).then(result => {
             setBoard(result);
@@ -27,16 +27,33 @@ export default function BoardDetails() {
     }, [board])
 
 
+ 
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        
+        try {
+          const descriptionUpdate = Object.fromEntries(new FormData(e.target));
+          setDescription("!==!==!==!==!"+descriptionUpdate)
+         // updatePass(user.id, passwordData)
+          console.log("it was changed successfully!")
+          document.getElementById("description").reset();
+        } catch (error) {
+          console.log({error:error.message})
+        }
+      };
+
     function deleteExecute() {
         deleting(board._id)
     }
-
     const deleting = async (id) => {
         await deleteOne(id)
         navigate("/")
     }
+    if (board.description) {
+        setDescription(JSON.parse(JSON.stringify(board.description)))
 
-console.log(board.description)
+    }
     return (
         <div className='boardCard' key={board._id}>
             {boardUser[0]?.username ? <div>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
@@ -45,8 +62,30 @@ console.log(board.description)
             {board.image !== "" ? <img src={board.image} alt="boardImg" width="150" height="150"></img> : ""}
             <div  >{board.originalPoster}</div>
             {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
-            {board.description ? description.map(x => <div>x</div>) : ""
-            }
+            <ul>
+            {description ? description.map(x => <li>x</li>) : ""}
+            </ul>
+            {user.accessToken ?
+                <section id="description" className="description">
+                    <form id="description" onSubmit={onSubmit}>
+                        <div className="container">
+                        
+                            <label htmlFor="comment">Comment:</label>
+                            <input
+                                type="text"
+                                id="description"
+                                name="description"
+                                placeholder='Add new comment here'
+
+                            ></input>
+                            <input
+                                className="btn submit"
+                                type="submit"
+                                value="description"
+                            />
+                        </div>
+                    </form>
+                </section> : ""}
         </div>
     )
 }
