@@ -12,6 +12,7 @@ export default function Profile() {
     getUser(user.id)
   }, [user])
 
+  //username and profile picture change
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,15 +32,15 @@ export default function Profile() {
     }
   };
 
+  //Password change
   const onSubmitPassword = async (e) => {
     e.preventDefault();
-
    
     try {
       const passwordData = Object.fromEntries(new FormData(e.target));
       updatePass(user.id, passwordData)
       console.log("it was changed successfully!")
-      
+      document.getElementById("passChange").reset();
     } catch (error) {
       console.log({error:error.message})
     }
@@ -61,7 +62,7 @@ export default function Profile() {
           defaultValue= {user.username}
         
           ></input>
-          <label htmlFor="image">Image:</label>
+          <label htmlFor="image">Image Link:</label>
           <input
             type="text"
             id="image"
@@ -80,7 +81,7 @@ export default function Profile() {
     </section>
 
 <section id="profile-page" className="profile">
-<form id="profile" onSubmit={onSubmitPassword}>
+<form id="passChange" onSubmit={onSubmitPassword}>
   <div className="container">
     <h1>Password change</h1>
     <label htmlFor="password">Password:</label>

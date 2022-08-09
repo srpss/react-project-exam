@@ -4,6 +4,7 @@ import { Context } from './context/Context';
 
 import * as boardService from '../services/board';
 import Board from './Board';
+import { deleteOne } from '../services/board';
 
 
 export default function MyComics() {
@@ -21,9 +22,14 @@ export default function MyComics() {
         });
 }, [id]);
 
-  
+const deleting= async (id) => {
+  await deleteOne(id)
+  let newboards= boards.filter(x => !(x._id === id))
+
+  setBoards(newboards) 
+}
   return (
-    boards.map(b => <Board Board key={b._id} board ={b}></Board>
+    boards.map(b => <Board Board key={b._id} board ={b} deleting={deleting}></Board>
     )
     
   )
