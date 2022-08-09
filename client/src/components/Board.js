@@ -14,7 +14,7 @@ export default function Board({ board, deleting }) {
     }
     useEffect(() => {
         getUser(board.owner).then(res => setUser(res))
-    }, [])
+    }, [board.owner])
 
     function deleteExecute() {
         deleting(board._id)
@@ -23,7 +23,7 @@ export default function Board({ board, deleting }) {
 
     return (
         <li className='boardCard'>
-            {boardUser?<div>Creator: {boardUser[0].username}</div>:<div>Loading...</div>}
+            {boardUser?<div>Creator: {boardUser[0]?.username}</div>:<div>Loading...</div>}
             <div  >ID: {board._id}</div>
             <div  >Last Update: {board.date}</div>
             {board.image !== ""?<img src={board.image} alt="boardImg" width="150" height="150"></img>:""}

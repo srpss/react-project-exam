@@ -10,7 +10,7 @@ import Catalog from './components/Catalog';
 import Create from './components/Create';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Details from './components/Details';
+import BoardDetails from './components/BoardDetails';
 import MyComics from './components/MyComics';
 import Nav from './components/Nav';
 import Register from './components/Register';
@@ -36,9 +36,9 @@ function App() {
     <Context.Provider value={{ user: auth, userLogin, userLogout }}>
       <div className="main">
         <Nav />
-        <Routes id='growth'>
+        <Routes >
           <Route path="/" element={<Catalog />} />
-          <Route path="/boards/:id" element={<Details />} />
+          <Route path="/boards/:id" element={<BoardDetails />} />
           {auth.accessToken ? <Route path="/my-boards" element={<MyComics />} /> : <Route path="/not-found" element={<NotFound />} />}
           {auth.accessToken ? <Route path="/create-new" element={<Create />} /> : <Route path="/not-found" element={<NotFound />} />}
           {!auth.accessToken ? <Route path="/login" element={<Login />} /> : <Route path="/" element={<RedirectHome />} />}
