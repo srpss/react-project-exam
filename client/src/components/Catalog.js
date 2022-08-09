@@ -25,12 +25,12 @@ export default function Catalog() {
     setBoards(newboards) 
 }
   return (
-    <>
+    <ul>
       {
         boards.length > 0
           ? boards.map(b => <Board key={b._id} board={b} deleting={deleting}></Board>)
           : <div className="boards-do-not-exist">Create new boards</div>
       }
-    </>
+    </ul>
   )
 }

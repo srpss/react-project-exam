@@ -36,7 +36,7 @@ function App() {
     <Context.Provider value={{ user: auth, userLogin, userLogout }}>
       <div className="main">
         <Nav />
-        <Routes>
+        <Routes id='growth'>
           <Route path="/" element={<Catalog />} />
           <Route path="/boards/:id" element={<Details />} />
           {auth.accessToken ? <Route path="/my-boards" element={<MyComics />} /> : <Route path="/not-found" element={<NotFound />} />}

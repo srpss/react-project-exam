@@ -1,17 +1,9 @@
 .main {
     position: relative;
     background-color: #bbb;
-    position: fixed;
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    border-top: 0px;
-    border: 0px;
-    padding: 0px;
-   
     width: 100%;
     left: 0;
-    padding-bottom: 10000px;
+   
 
 }
 
@@ -20,7 +12,7 @@
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-x: hidden;
     background-color: lightskyblue;
     position: relative;
     border-top: 0px;
@@ -59,6 +51,10 @@ li a:hover {
 }
 
 body {
-    background-color: lightskyblue;
+    background-color: #bbb;
 
+}
+
+ul {
+    list-style-type: none;
 }

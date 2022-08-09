@@ -73,12 +73,14 @@ app.get('/myboards/:id', [authJwt.verifyToken], async (req, res) => {
     res.json({ error: error.message })
   }
 });
+
 app.get('/user/:id', [authJwt.verifyToken], async (req, res) => {
   const id = req.params.id
   try {
     const user = await boardsService.getUser(id).lean();
-
-    res.json(user);
+    const editUser = [{_id:user[0]._id, username: user[0].username, image: user[0].image}]
+    
+    res.json(editUser);
   } catch (error) {
     res.json({ error: error.message })
   }
@@ -103,7 +105,7 @@ app.post('/user-pass/:id', [authJwt.verifyToken], async (req, res) => {
  
   try {
     const user = await boardsService.updatePass(id, password).lean();
-    console.log(user)
+   
     res.json({ message: "Password was updated!" });
   } catch (error) {
     res.json({ error: error.message })
