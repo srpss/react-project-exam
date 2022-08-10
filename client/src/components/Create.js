@@ -16,9 +16,11 @@ export default function Create() {
     const boardData = Object.fromEntries(new FormData(e.target));
     boardData.owner = id
     boardData.date = new Date();
-    boardData.description = "";
+    boardData.description = [];
     try {
       const id = await boardService.create(boardData)
+      
+
       navigate(`/boards/${id}`);
     } catch (error) {
       console.log({error:error.message})

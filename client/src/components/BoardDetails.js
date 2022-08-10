@@ -11,7 +11,7 @@ export default function BoardDetails() {
     let [board, setBoard] = useState();
     const { user } = useContext(Context)
     const [boardUser, setUser] = useState([])
-   // let [description, setDescription] = useState([])
+    let [description, setDescription] = useState([])
 
     let { id } = useParams();
     const navigate = useNavigate()
@@ -20,31 +20,31 @@ export default function BoardDetails() {
         getOne(id).then(result => {
             setBoard(result);
 
-         
+            setDescription(result.description)
         });
     }, [id])
 
     useEffect(() => {
-        if(board?.owner){
+        if (board?.owner) {
             getUser(board.owner).then(res => setUser(res))
         }
-     
+
     }, [board])
 
 
- 
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        
+
         try {
-          const descriptionUpdate = Object.fromEntries(new FormData(e.target));
-          setDescription(board._id,descriptionUpdate)
-          document.getElementById("description").reset();
+            const descriptionUpdate = Object.fromEntries(new FormData(e.target));
+            setDescription(board._id, descriptionUpdate)
+            document.getElementById("description").reset();
         } catch (error) {
-          console.log({error: error.message})
+            console.log({ error: error.message })
         }
-      };
+    };
 
     function deleteExecute() {
         deleting(board._id)
@@ -53,33 +53,32 @@ export default function BoardDetails() {
         await deleteOne(id)
         navigate("/")
     }
-   
-    if (board && board.description) {
-        //setDescription(JSON.parse(JSON.stringify(board.description)))
 
-    }
 
-    // <ul>
-    // {description ? description.map(x => <li>x</li>) : ""}
-    // </ul>
-  
+
+
+
     return (
         <div className='boardCard'>
             {boardUser[0]?.username ? <div>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
-            {board?   
-            <div>
-            <div  >ID: {board._id}</div>
-            <div  >Last Update: {board.date}</div>
-            {board.image !== "" ? <img src={board.image} alt="boardImg" width="150" height="150"></img> : ""}
-            <div  >{board.originalPoster}</div>
-            {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
-            </div>:""}
-         
+            {board ?
+                <div>
+                    <div  >ID: {board._id}</div>
+                    <div  >Last Update: {board.date}</div>
+                    {board.image !== "" ? <img src={board.image} alt="boardImg" width="150" height="150"></img> : ""}
+                    <div  >{board.originalPoster}</div>
+                    {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
+                    {description ?
+                        <ul>
+                            {description ? description.map(x => <li>{x}</li>
+                            ) : ""}
+                         </ul>: ""} </div> : ""}
+
             {user.accessToken ?
-                <section  className="description">
+                <section className="description">
                     <form id="description" onSubmit={onSubmit}>
                         <div className="container">
-                        
+
                             <label htmlFor="comment">Comment:</label>
                             <input
                                 type="text"
