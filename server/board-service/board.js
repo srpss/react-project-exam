@@ -24,3 +24,9 @@ exports.updatePass = (id, data) => {
     return User.updateOne({_id: id}, {$set: data}, {runValidators: true})
      
 }
+
+exports.updateBoard = (id, data) => {
+
+    return Board.updateOne({_id: id}, {$push: data}, {runValidators: true})
+     
+}

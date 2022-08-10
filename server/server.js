@@ -149,8 +149,24 @@ app.get('/boards/:_id', async (req, res) => {
 
 
 });
+//Update board, only used to update description in app
+app.post('/boards/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const desc = req.body.description
+    const update = {description : desc}
+    console.log(update)
+    const board = await boardsService.updateBoard(id, update).lean();
+
+    res.json(board);
+  } catch (error) {
+    res.json({ error: error.message })
+  }
 
 
+
+});
+//Create board
 app.post('/boards', async (req, res) => {
   try {
 
