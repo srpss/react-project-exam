@@ -8,10 +8,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 export default function BoardDetails() {
-    let [board, setBoard] = useState({});
+    let [board, setBoard] = useState();
     const { user } = useContext(Context)
     const [boardUser, setUser] = useState([])
-    let [description, setDescription] = useState([])
+   // let [description, setDescription] = useState([])
 
     let { id } = useParams();
     const navigate = useNavigate()
@@ -19,11 +19,16 @@ export default function BoardDetails() {
     useEffect(() => {
         getOne(id).then(result => {
             setBoard(result);
+
+         
         });
     }, [id])
 
     useEffect(() => {
-        getUser(board.owner).then(res => setUser(res))
+        if(board?.owner){
+            getUser(board.owner).then(res => setUser(res))
+        }
+     
     }, [board])
 
 
@@ -33,13 +38,13 @@ export default function BoardDetails() {
         e.preventDefault();
         
         try {
-          const descriptionUpdate = Object.fromEntries(new FormData(e.target));
-          setDescription("!==!==!==!==!"+descriptionUpdate)
-         // updatePass(user.id, passwordData)
+         // const descriptionUpdate = Object.fromEntries(new FormData(e.target));
+        //  setDescription("!==!==!==!==!"+descriptionUpdate)
+         
           console.log("it was changed successfully!")
           document.getElementById("description").reset();
         } catch (error) {
-          console.log({error:error.message})
+          console.log({error: error.message})
         }
       };
 
@@ -50,21 +55,28 @@ export default function BoardDetails() {
         await deleteOne(id)
         navigate("/")
     }
-    if (board.description) {
-        setDescription(JSON.parse(JSON.stringify(board.description)))
+   
+    if (board && board.description) {
+        //setDescription(JSON.parse(JSON.stringify(board.description)))
 
     }
+
+    // <ul>
+    // {description ? description.map(x => <li>x</li>) : ""}
+    // </ul>
+
     return (
-        <div className='boardCard' key={board._id}>
+        <div className='boardCard'>
             {boardUser[0]?.username ? <div>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
+            {board?   
+            <div>
             <div  >ID: {board._id}</div>
             <div  >Last Update: {board.date}</div>
             {board.image !== "" ? <img src={board.image} alt="boardImg" width="150" height="150"></img> : ""}
             <div  >{board.originalPoster}</div>
             {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
-            <ul>
-            {description ? description.map(x => <li>x</li>) : ""}
-            </ul>
+            </div>:""}
+         
             {user.accessToken ?
                 <section id="description" className="description">
                     <form id="description" onSubmit={onSubmit}>
