@@ -26,8 +26,16 @@ exports.updatePass = (id, data) => {
 }
 
 exports.updateBoard = (id, data) => {
-
+   
     const test = Board.updateOne({_id: id}, {$push: data}, {runValidators: true})
+
+    return test
+     
+}
+
+exports.updateDate = (id, data) => {
+   
+    const test = Board.updateOne({_id: id}, {$set: data}, {runValidators: true})
 
     return test
      

@@ -64,7 +64,7 @@ export default function BoardDetails() {
 
 
 
-
+    
 
     return (
         <div className='boardCard'>
@@ -73,15 +73,15 @@ export default function BoardDetails() {
                 <div>
                     <div  >ID: {board._id}</div>
                     <div  >Last Update: {board.date}</div>
-                    {board.image !== "" ? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
+                    {board.image !==""? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
                     <div  >{board.originalPoster}</div>
                     {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
                     {description ?
                         <ul>
                             {description ? description.map(x => 
                             <li key={x._id}><p>{x.owner}</p>
-                            <img src={x?.image} alt="boardImg" width="150" height="150">
-                                </img><p>{x?.comment}</p></li>
+                            {x?.image !==""?<img src={x?.image} alt="wrongLink" width="150" height="150"></img>: ""}
+                               <p>{x?.comment}</p></li>
                             ) : ""}
                          </ul>: ""} </div> : ""}
 

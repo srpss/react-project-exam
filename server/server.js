@@ -160,8 +160,12 @@ app.post('/boards/:id', async (req, res) => {
     const owner = req.body.owner
     const update =  {description:{comment : comm, image: image, owner: owner}}
 
-
+    
     const board = await boardsService.updateBoard(id, update).lean();
+    const date = new Date()
+    const test= {date : date}
+
+    await boardsService.updateDate(id,test)
 
     res.json(board);
   } catch (error) {
