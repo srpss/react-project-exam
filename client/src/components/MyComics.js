@@ -30,7 +30,7 @@ const deleting= async (id) => {
 }
   return (
     <ul>
-    {boards.map(b => <Board Board key={b._id} board ={b} deleting={deleting}></Board>)}
+    {boards.sort((a,b) => (b.date > a.date) ? 1 : -1).map(b => <Board Board key={b._id} board ={b} deleting={deleting}></Board>)}
     </ul>
   )
 }

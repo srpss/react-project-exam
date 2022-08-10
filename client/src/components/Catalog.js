@@ -22,13 +22,16 @@ export default function Catalog() {
     await deleteOne(id)
     let newboards= boards.filter(x => !(x._id === id))
   
-    setBoards(newboards) 
+    setBoards(newboards)
+    
 }
+
+
   return (
     <ul>
       {
         boards.length > 0
-          ? boards.map(b => <Board key={b._id} board={b} deleting={deleting}></Board>)
+          ? boards.sort((a,b) => (b.date > a.date) ? 1 : -1).map(b => <Board key={b._id} board={b} deleting={deleting}></Board>)
           : <div className="boards-do-not-exist">Create new boards</div>
       }
     </ul>

@@ -20,7 +20,7 @@ export default function Board({ board, deleting }) {
         deleting(board._id)
     }
    
-
+    
     return (
         <li className='boardCard'>
             {boardUser?<div>Creator: {boardUser[0]?.username}</div>:<div>Loading...</div>}
