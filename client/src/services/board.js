@@ -22,3 +22,5 @@ export const login =  (data) => request.post(`${baseUrl}/api/auth/signin`,data)
 export const register =  (data) => request.post(`${baseUrl}/api/auth/signup`, data)
 
 export const updatePass = (_id, data) => request.post(`${baseUrl}/user-pass/${_id}`, data)
+
+export const setDescription = (_id, data) => request.post(`${baseUrl}/boards/${_id}`, data)

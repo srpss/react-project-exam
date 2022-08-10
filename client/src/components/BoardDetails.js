@@ -1,7 +1,7 @@
 import { React, useEffect, useState, useContext } from 'react';
 
 import { Context } from './context/Context';
-import { deleteOne, getOne, getUser } from '../services/board';
+import { deleteOne, getOne, getUser, setDescription } from '../services/board';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -38,10 +38,8 @@ export default function BoardDetails() {
         e.preventDefault();
         
         try {
-         // const descriptionUpdate = Object.fromEntries(new FormData(e.target));
-        //  setDescription("!==!==!==!==!"+descriptionUpdate)
-         
-          console.log("it was changed successfully!")
+          const descriptionUpdate = Object.fromEntries(new FormData(e.target));
+          setDescription(board._id,descriptionUpdate)
           document.getElementById("description").reset();
         } catch (error) {
           console.log({error: error.message})
@@ -64,7 +62,7 @@ export default function BoardDetails() {
     // <ul>
     // {description ? description.map(x => <li>x</li>) : ""}
     // </ul>
-
+  
     return (
         <div className='boardCard'>
             {boardUser[0]?.username ? <div>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
@@ -78,7 +76,7 @@ export default function BoardDetails() {
             </div>:""}
          
             {user.accessToken ?
-                <section id="description" className="description">
+                <section  className="description">
                     <form id="description" onSubmit={onSubmit}>
                         <div className="container">
                         
