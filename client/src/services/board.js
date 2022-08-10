@@ -24,3 +24,8 @@ export const register =  (data) => request.post(`${baseUrl}/api/auth/signup`, da
 export const updatePass = (_id, data) => request.post(`${baseUrl}/user-pass/${_id}`, data)
 
 export const updateDescription = (_id, data) => request.post(`${baseUrl}/boards/${_id}`, data)
+
+
+export const editOne = (_id, data) => request.post(`${baseUrl}/boardsDetails/${_id}`, data)
+
+export const deleteDesc = (_id) => request.get(`${baseUrl}/deleteBoardDesc/${_id}`)

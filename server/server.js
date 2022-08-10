@@ -175,6 +175,51 @@ app.post('/boards/:id', async (req, res) => {
 
 
 });
+
+//delete description 
+app.get('/deleteBoardDesc/:id', async (req, res) => {
+  try {
+   
+   
+    const id = {_id: req.params.id}
+ 
+    const board = await boardsService.deleteDesc(id).lean();
+    console.log(board)
+    const date = new Date()
+    const test= {date : date}
+
+    await boardsService.updateDate(id,test)
+
+    res.json(board);
+  } catch (error) {
+    res.json({ error: error.message })
+  }
+
+
+
+});
+
+app.post('/boardsDetails/:id', async (req, res) => {
+  try {
+    const id = req.params.id
+    const data = req.body
+
+    const board = await boardsService.updateBoardDetails(id, data).lean();
+
+    const date = new Date()
+    const test= {date : date}
+
+    await boardsService.updateDate(id,test)
+
+    res.json(board);
+  } catch (error) {
+    res.json({ error: error.message })
+  }
+
+
+
+});
+
 //Create board
 app.post('/boards', async (req, res) => {
   try {

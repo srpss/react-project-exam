@@ -1,7 +1,7 @@
 import { React, useEffect, useState, useContext } from 'react';
 
 import { Context } from './context/Context';
-import { deleteOne, getOne, getUser, updateDescription } from '../services/board';
+import { deleteOne, getOne, getUser, updateDescription,editOne,deleteDesc } from '../services/board';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -34,8 +34,6 @@ export default function BoardDetails() {
 
 
 
-
-
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -61,10 +59,32 @@ export default function BoardDetails() {
         await deleteOne(id)
         navigate("/")
     }
+    function deleteDescr(id) {
+        deletingDescr(id)
+    }
+    const deletingDescr = async (id) => {
+        await deleteDesc(id)
+        setStater(!stater)
+      
+    }
 
+    const onEdit = async (e) => {
+        e.preventDefault();
 
+        try {
+            const oUpdate = Object.fromEntries(new FormData(e.target));
+            
+            editOne(board._id, oUpdate)
+            document.getElementById("edit").reset();
+           
+            
+            setStater(!stater)
+         
+        } catch (error) {
+            console.log({ error: error.message })
+        }
+    };
 
-    
 
     return (
         <div className='boardCard'>
@@ -76,12 +96,40 @@ export default function BoardDetails() {
                     {board.image !==""? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
                     <div  >{board.originalPoster}</div>
                     {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
+                    {board.owner === user.id ? <section className="edit">
+                    <form id="edit" onSubmit={onEdit}>
+                        <div className="container">
+
+                            <label htmlFor="edit">Original Post:</label>
+                            <input
+                                type="text"
+                                id="originalPoster"
+                                name="originalPoster"
+                                placeholder='Add new comment here'
+
+                            ></input>
+                             <label htmlFor="image">Image Link:</label>
+                            <input
+                                type="text"
+                                id="image"
+                                name="image"
+                                placeholder='Add image link here'
+
+                            ></input>
+                            <input
+                                className="btn submit"
+                                type="submit"
+                                value="Edit"
+                            />
+                        </div>
+                    </form>
+                </section> : ""}
                     {description ?
                         <ul>
                             {description ? description.map(x => 
                             <li key={x._id}><p>{x.owner}</p>
                             {x?.image !==""?<img src={x?.image} alt="wrongLink" width="150" height="150"></img>: ""}
-                               <p>{x?.comment}</p></li>
+                               <p>{x?.comment}</p>{x.owner === user.username ?<button onClick ={() => {deleteDescr(x._id)}}>Delete</button>:""}</li>
                             ) : ""}
                          </ul>: ""} </div> : ""}
 
