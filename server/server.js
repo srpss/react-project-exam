@@ -153,10 +153,14 @@ app.get('/boards/:_id', async (req, res) => {
 app.post('/boards/:id', async (req, res) => {
   try {
    
+   
     const id = req.params.id
-    const desc = req.body.description
-    const update = {description : desc}
-  
+    const comm = req.body?.comment?req.body.comment:""
+    const image = req.body?.image?req.body.image:""
+    const owner = req.body.owner
+    const update =  {description:{comment : comm, image: image, owner: owner}}
+
+
     const board = await boardsService.updateBoard(id, update).lean();
 
     res.json(board);

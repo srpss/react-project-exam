@@ -23,4 +23,4 @@ export const register =  (data) => request.post(`${baseUrl}/api/auth/signup`, da
 
 export const updatePass = (_id, data) => request.post(`${baseUrl}/user-pass/${_id}`, data)
 
-export const setDescription = (_id, data) => request.post(`${baseUrl}/boards/${_id}`, data)
+export const updateDescription = (_id, data) => request.post(`${baseUrl}/boards/${_id}`, data)
