@@ -13,6 +13,7 @@ export default function Details() {
   let { id } = useParams();
   const navigate = useNavigate()
 
+
   useEffect(() => {
     boardService.getOne(id)
       .then(result => {

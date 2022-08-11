@@ -20,4 +20,5 @@ Headers
 - Overall, you can create threads and post comments. With images
 - Authetnication - signin and signup
 - Guests can view threads
-
+- forms have simple validation, some fields are required
+- errors are throwned in the console or at form
