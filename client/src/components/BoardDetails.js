@@ -1,7 +1,7 @@
 import { React, useEffect, useState, useContext } from 'react';
 
 import { Context } from './context/Context';
-import { deleteOne, getOne, getUser, updateDescription,editOne,deleteDesc } from '../services/board';
+import { deleteOne, getOne, getUser, updateDescription, editOne, deleteDesc } from '../services/board';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
@@ -14,16 +14,26 @@ export default function BoardDetails() {
     let [description, setDescription] = useState([])
     const [stater, setStater] = useState(false)
     let { id } = useParams();
-  
+
+    const [formValues, setFormValues] = useState({ originalPoster: "", image: "" })
+    const [formErrors, setFormErrors] = useState({})
+    const [error, setError] = useState()
+    let veri = ""
+
+    const [formValuesDesc, setFormValuesDesc] = useState({ comment: "", image: "" })
+    const [formErrorsDesc, setFormErrorsDesc] = useState({})
+    const [errorDesc, setErrorDesc] = useState()
+    let veriDesc = ""
+
     const navigate = useNavigate()
 
     useEffect(() => {
         getOne(id).then(result => {
             setBoard(result);
-
+            setFormValues(result)
             setDescription(result.description)
         });
-    }, [id,stater])
+    }, [id, stater])
 
     useEffect(() => {
         if (board?.owner) {
@@ -37,16 +47,33 @@ export default function BoardDetails() {
     const onSubmit = async (e) => {
         e.preventDefault();
 
+        validateDesc(formValuesDesc)
+
+        if (Object.keys(veriDesc).length !== 0) {
+
+            return
+        }
         try {
             const descriptionUpdate = Object.fromEntries(new FormData(e.target));
             descriptionUpdate.owner = user.username
-            
-            updateDescription(board._id, descriptionUpdate)
-            document.getElementById("description").reset();
+
+            let check = (descriptionUpdate.image.slice(0, 8) === 'https://')
+            let check2 = (descriptionUpdate.image.slice(0, 7) === 'http://')
            
-            
+            if (check === false && check2 === false) {
+                descriptionUpdate.image = ""
+            }
+
+            const desc = updateDescription(board._id, descriptionUpdate)
+            if (desc.error) {
+                setErrorDesc(desc.error)
+                return
+            }
+            document.getElementById("description").reset();
+
+
             setStater(!stater)
-         
+
         } catch (error) {
             console.log({ error: error.message })
         }
@@ -65,26 +92,74 @@ export default function BoardDetails() {
     const deletingDescr = async (id) => {
         await deleteDesc(id)
         setStater(!stater)
-      
+
     }
 
     const onEdit = async (e) => {
         e.preventDefault();
 
+        validate(formValues)
+
+        if (Object.keys(veri).length !== 0) {
+
+            return
+        }
+
         try {
             const oUpdate = Object.fromEntries(new FormData(e.target));
             
-            editOne(board._id, oUpdate)
-            document.getElementById("edit").reset();
+            let check = (oUpdate.image.slice(0, 8) === 'https://')
+            let check2 = (oUpdate.image.slice(0, 7) === 'http://')
            
-            
+            if (check === false && check2 === false) {
+                oUpdate.image = ""
+            }
+
+            const editBoard = editOne(board._id, oUpdate)
+            if (editBoard.error) {
+                setError(editBoard.error)
+                return
+            }
+            document.getElementById("edit").reset();
+
+
             setStater(!stater)
-         
+
         } catch (error) {
             console.log({ error: error.message })
         }
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setFormValues({ ...formValues, [name]: value })
+
+    }
+
+    const validate = (values) => {
+        const errors = {}
+        if (!values?.originalPoster) {
+            errors.originalPoster = "First post is required!"
+        }
+        veri = errors
+        setFormErrors(errors)
+
+    }
+
+    const handleChangeDesc = (e) => {
+        const { name, value } = e.target
+        setFormValuesDesc({ ...formValuesDesc, [name]: value })
+
+    }
+    const validateDesc = (values) => {
+        const errors = {}
+        if (!values?.comment) {
+            errors.comment = "Any comment is required!"
+        }
+        veriDesc = errors
+        setFormErrorsDesc(errors)
+
+    }
 
     return (
         <div className='boardCard'>
@@ -93,45 +168,51 @@ export default function BoardDetails() {
                 <div>
                     <div  >ID: {board._id}</div>
                     <div  >Last Update: {board.date}</div>
-                    {board.image !==""? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
+                    {board.image !== "" ? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
                     <div  >{board.originalPoster}</div>
                     {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
                     {board.owner === user.id ? <section className="edit">
-                    <form id="edit" onSubmit={onEdit}>
-                        <div className="container">
+                        <form id="edit" onSubmit={onEdit}>
+                            <div className="container">
 
-                            <label htmlFor="edit">Original Post:</label>
-                            <input
-                                type="text"
-                                id="originalPoster"
-                                name="originalPoster"
-                                placeholder='Add new comment here'
+                                <label htmlFor="edit">Original Post:</label>
+                                <input
+                                    type="text"
+                                    id="originalPoster"
+                                    name="originalPoster"
 
-                            ></input>
-                             <label htmlFor="image">Image Link:</label>
-                            <input
-                                type="text"
-                                id="image"
-                                name="image"
-                                placeholder='Add image link here'
+                                    value={setFormValues.originalPoster} onChange={handleChange}
+                                    defaultValue={board?.originalPoster}
+                                ></input>
+                                <p style={{ fontSize: 12, color: "red" }}>{formErrors.originalPoster}</p>
 
-                            ></input>
-                            <input
-                                className="btn submit"
-                                type="submit"
-                                value="Edit"
-                            />
-                        </div>
-                    </form>
-                </section> : ""}
+                                <label htmlFor="image">Image Link:</label>
+                                <input
+                                    type="text"
+                                    id="image"
+                                    name="image"
+
+                                    placeholder='Image URL https:/...png'
+                                    defaultValue={board?.image}
+
+                                ></input>
+                                <input
+                                    className="btn submit"
+                                    type="submit"
+                                    value="Edit"
+                                />
+                                <p style={{ fontSize: 12, color: "red" }}>{error}</p>
+                            </div>
+                        </form>
+                    </section> : ""}
                     {description ?
                         <ul>
-                            {description ? description.map(x => 
-                            <li key={x._id}><p>{x.owner}</p>
-                            {x?.image !==""?<img src={x?.image} alt="wrongLink" width="150" height="150"></img>: ""}
-                               <p>{x?.comment}</p>{x.owner === user.username ?<button onClick ={() => {deleteDescr(x._id)}}>Delete</button>:""}</li>
+                            {description ? description.map(x =>
+                                <li key={x._id}><p>{x.owner}</p>
+                                    {x?.image !== "" ? <img src={x?.image} alt="wrongLink" width="150" height="150"></img> : ""}
+                                    <p>{x?.comment}</p>{x.owner === user.username ? <button onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
                             ) : ""}
-                         </ul>: ""} </div> : ""}
+                        </ul> : ""} </div> : ""}
 
             {user.accessToken ?
                 <section className="description">
@@ -144,9 +225,10 @@ export default function BoardDetails() {
                                 id="comment"
                                 name="comment"
                                 placeholder='Add new comment here'
-
+                                value={setFormValuesDesc.comment} onChange={handleChangeDesc}
                             ></input>
-                             <label htmlFor="image">Image Link:</label>
+                            <p style={{ fontSize: 12, color: "red" }}>{formErrorsDesc.comment}</p>
+                            <label htmlFor="image">Image Link:</label>
                             <input
                                 type="text"
                                 id="image"
@@ -157,8 +239,9 @@ export default function BoardDetails() {
                             <input
                                 className="btn submit"
                                 type="submit"
-                                value="Submit"
+                              
                             />
+                            <p style={{ fontSize: 12, color: "red" }}>{errorDesc}</p>
                         </div>
                     </form>
                 </section> : ""}

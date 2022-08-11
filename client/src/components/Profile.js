@@ -86,7 +86,7 @@ export default function Profile() {
     <h1>Password change</h1>
     <label htmlFor="password">Password:</label>
     <input
-      type="text"
+      type="password"
       id="password"
       name="password"
       placeholder='Add new password here'
