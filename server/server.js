@@ -184,7 +184,7 @@ app.get('/deleteBoardDesc/:id', async (req, res) => {
     const id = {_id: req.params.id}
  
     const board = await boardsService.deleteDesc(id).lean();
-    console.log(board)
+    
     const date = new Date()
     const test= {date : date}
 
