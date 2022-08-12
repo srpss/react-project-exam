@@ -55,8 +55,23 @@ li a:hover {
 body {
     background-color: #bbb;
     font-style: normal;
+    
 }
 
 ul {
     list-style-type: none;
 }
+
+.navUsername{
+    position:relative;
+    top:28px;
+    font-family: 'Courier New', Courier, monospace;
+    color:black
+
+   }
+
+   .navImage{
+    position:relative;
+    top:10px;
+    left: 10px
+   }

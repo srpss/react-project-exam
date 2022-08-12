@@ -162,20 +162,20 @@ export default function BoardDetails() {
     }
 
     return (
-        <div className='boardCard'>
+        <div  className='boardCard' >
             {boardUser[0]?.username ? <div style={{ fontSize: '15px' }}>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
             {board ?
-                <div>
+                <div >
                     <div style={{color:'red', fontSize: '10px' }} >ID: {board._id}</div>
                     <div style={{ fontSize: '15px' }} >Last Update: {board.date}</div>
                     {board.image !== "" ? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
-                    <div style={{ color: 'green' }} className="op" >{board.originalPoster}</div>
+                    <div className="op" style={{ color: 'green' }}  >{board.originalPoster}</div>
                     {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
                     {board.owner === user.id ? <section className="edit">
                         <form id="edit" onSubmit={onEdit}>
-                            <div className="container">
+                            <div className="op">
 
-                                <label htmlFor="edit">Original Post:</label>
+                                <label htmlFor="edit">Original post edit:</label>
                                 <textarea rows="4" cols="50"
                                     type="text"
                                     id="originalPoster"
@@ -186,7 +186,7 @@ export default function BoardDetails() {
                                 ></textarea>
                                 <p style={{ fontSize: 12, color: "red" }}>{formErrors.originalPoster}</p>
 
-                                <label htmlFor="image">Image Link:</label>
+                                <label htmlFor="image">Original image edit:</label>
                                 <input
                                     type="text"
                                     id="image"
@@ -203,8 +203,9 @@ export default function BoardDetails() {
                                 />
                                 <p style={{ fontSize: 12, color: "red" }}>{error}</p>
                             </div>
-                        </form>
+                        </form >
                     </section> : ""}
+                    <h2 className='op'>Comments:</h2>
                     {description ?
                         <ul>
                             {description.map(x =>

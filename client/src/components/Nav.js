@@ -29,7 +29,7 @@ export default function Nav() {
                 {user?.accessToken ? <li className="li"><Link to="/logout"><NavLink exact activeClassName="active" to="/logout">
                     Logout
                 </NavLink></Link></li> : ""}
-                {user?.accessToken ? <div><li className="li"><div className='navUsername'>{user.username}</div> </li><li><img src={user.image} alt="UserImg" width="45" height="45"></img></li></div> : ""}
+                {user?.accessToken ? <div><li className="li"><div className='navUsername'>{user.username}</div> </li><li><img  className='navImage' src={user.image} alt="UserImg" width="60" height="60"></img></li></div> : ""}
             </ul>
         </div>
     )

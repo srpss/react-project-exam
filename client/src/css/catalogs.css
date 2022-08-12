@@ -17,7 +17,7 @@
     border-right: 0px;
 
     border-left: 0px;
-
+    border-bottom: 1px solid black;
 }
 
 .desc {
@@ -28,4 +28,7 @@
     border-right: 0px;
     border-bottom: 1px solid black;
     border-left: 0px;
+}
+.navUsername{
+ position:relative
 }

@@ -27,9 +27,10 @@ export default function Board({ board, deleting }) {
             <div style={{color:'red', fontSize: '10px' }} >ID: {board._id}</div>
             <div style={{ fontSize: '15px' }}> Last Update: {board.date}</div>
             {board.image !== ""?<img src={board.image} alt="boardImg" width="150" height="150"></img>:""}
-            <div className="op" style={{ color: 'green' }}>{board.originalPoster}</div>           
-            <button onClick={details}>Details</button>
-            {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
+            <div className="op" style={{ color: 'green' }}>{board.originalPoster}
+           <p> <button onClick={details}>Details</button>
+            {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}</p></div>           
+
          
         </li>
     )
