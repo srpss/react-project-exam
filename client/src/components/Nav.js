@@ -9,25 +9,25 @@ export default function Nav() {
     return (
         <div className='nav'>
             <ul className="nav">
-                <li className="li"><Link to="/"> <NavLink exact activeclassname="active" to="/">
+                <li className="li"><Link to="/"> <NavLink  activeclassname="active" to="/">
                     Catalog
                 </NavLink></Link></li>
-                {user?.accessToken ? <li className="li"><Link to="/my-boards"><NavLink exact activeclassname="active" to="/my-boards">
+                {user?.accessToken ? <li className="li"><Link to="/my-boards"><NavLink  activeclassname="active" to="/my-boards">
                     My Threads
                 </NavLink></Link></li> : ""}
-                {user?.accessToken ? <li className="li"><Link to="/create-new"><NavLink exact activeclassname="active" to="/create-new">
+                {user?.accessToken ? <li className="li"><Link to="/create-new"><NavLink  activeclassname="active" to="/create-new">
                     Create
                 </NavLink></Link></li> : ""}
-                {!user?.accessToken ? <li className="li"><Link to="/login"><NavLink exact activeclassname="active" to="/login">
+                {!user?.accessToken ? <li className="li"><Link to="/login"><NavLink  activeclassname="active" to="/login">
                     Login
                 </NavLink></Link></li> : ""}
-                {!user?.accessToken ? <li className="li"><Link to="/register"><NavLink exact activeclassname="active" to="/register">
+                {!user?.accessToken ? <li className="li"><Link to="/register"><NavLink  activeclassname="active" to="/register">
                     Register
                 </NavLink></Link></li> : ""}
-                {user?.accessToken ? <li className="li"><Link to="/profile"><NavLink exact activeclassname="active" to="/profile">
+                {user?.accessToken ? <li className="li"><Link to="/profile"><NavLink  activeclassname="active" to="/profile">
                     Profile
                 </NavLink></Link></li> : ""}
-                {user?.accessToken ? <li className="li"><Link to="/logout"><NavLink exact activeclassname="active" to="/logout">
+                {user?.accessToken ? <li className="li"><Link to="/logout"><NavLink  activeclassname="active" to="/logout">
                     Logout
                 </NavLink></Link></li> : ""}
                 {user?.accessToken ? <div><li className="li"><div className='navusername'>{user.username}</div> </li><li><img  className='navimage' src={user.image} alt="UserImg" width="60" height="60"></img></li></div> : ""}
