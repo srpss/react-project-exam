@@ -209,9 +209,9 @@ export default function BoardDetails() {
                     {description ?
                         <ul>
                             {description.map(x =>
-                                <li style={{ color: 'green' }} className="desc" key={x._id}><p>{x.owner}</p>
+                                <li  className="desc" key={x._id}><p>User: {x.owner}</p>
                                     {x?.image !== "" ? <img src={x?.image} alt="wrongLink" width="150" height="150"></img> : ""}
-                                    <p>{x?.comment}</p>{x.owner === user.username ? <button onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
+                                    <p style={{ color: 'green' }}> {x?.comment}</p>{x.owner === user.username ? <button onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
                             ) }
                         </ul> : ""} </div> : ""}
 
