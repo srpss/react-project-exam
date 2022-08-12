@@ -93,7 +93,7 @@ export default function Create() {
           <input
             className="btn submit"
             type="submit"
-            value="Create Game"
+            value="Create Thread"
           />
            <p style={{ fontSize: 12, color: "red" }}>{error}</p>
         </div>
