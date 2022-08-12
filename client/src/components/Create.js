@@ -73,13 +73,13 @@ export default function Create() {
         <div className="container">
           <h1>Create board thread</h1>
           <label htmlFor="originalPoster">First post:</label>
-          <input
+          <textarea rows="4" cols="50"
             type="text"
             id="originalPoster"
             name="originalPoster"
             placeholder="How it will start"
             value={setFormValues.originalPoster} onChange={handleChange}
-          ></input>
+          ></textarea>
             <p style={{ fontSize: 12, color: "red" }}>{formErrors.originalPoster}</p>
 
           <label htmlFor="image">Image:</label>

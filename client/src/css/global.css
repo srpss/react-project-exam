@@ -47,12 +47,14 @@ li a:hover {
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: darkgrey;
+    transition-delay: 100ms;
+    transition-duration: 100ms;
 }
 
 body {
     background-color: #bbb;
-
+    font-style: normal;
 }
 
 ul {

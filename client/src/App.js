@@ -3,7 +3,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { useLocalStorage } from './components/hooks/useLocalStorage';
 import { Context } from './components/context/Context';
-import './style.css';
+import './css/global.css';
+import './css/catalogs.css'
 
 import NotFound from './components/NotFound';
 import Catalog from './components/Catalog';

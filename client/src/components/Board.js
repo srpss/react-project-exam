@@ -23,14 +23,14 @@ export default function Board({ board, deleting }) {
     
     return (
         <li className='boardCard'>
-            {boardUser?<div>Creator: {boardUser[0]?.username}</div>:<div>Loading...</div>}
-            <div  >ID: {board._id}</div>
-            <div  >Last Update: {board.date}</div>
+            {boardUser?<div style={{ fontSize: '15px' }} >Creator: {boardUser[0]?.username}</div>:<div>Loading...</div>}
+            <div style={{color:'red', fontSize: '10px' }} >ID: {board._id}</div>
+            <div style={{ fontSize: '15px' }}> Last Update: {board.date}</div>
             {board.image !== ""?<img src={board.image} alt="boardImg" width="150" height="150"></img>:""}
-            <div  >{board.originalPoster}</div>           
+            <div className="op" style={{ color: 'green' }}>{board.originalPoster}</div>           
             <button onClick={details}>Details</button>
             {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
-            ==================================================================================
+         
         </li>
     )
 }

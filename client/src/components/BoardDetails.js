@@ -163,27 +163,27 @@ export default function BoardDetails() {
 
     return (
         <div className='boardCard'>
-            {boardUser[0]?.username ? <div>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
+            {boardUser[0]?.username ? <div style={{ fontSize: '15px' }}>Creator: {boardUser[0].username}</div> : <div>Loading...</div>}
             {board ?
                 <div>
-                    <div  >ID: {board._id}</div>
-                    <div  >Last Update: {board.date}</div>
+                    <div style={{color:'red', fontSize: '10px' }} >ID: {board._id}</div>
+                    <div style={{ fontSize: '15px' }} >Last Update: {board.date}</div>
                     {board.image !== "" ? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
-                    <div  >{board.originalPoster}</div>
+                    <div style={{ color: 'green' }} className="op" >{board.originalPoster}</div>
                     {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
                     {board.owner === user.id ? <section className="edit">
                         <form id="edit" onSubmit={onEdit}>
                             <div className="container">
 
                                 <label htmlFor="edit">Original Post:</label>
-                                <input
+                                <textarea rows="4" cols="50"
                                     type="text"
                                     id="originalPoster"
                                     name="originalPoster"
 
                                     value={setFormValues.originalPoster} onChange={handleChange}
                                     defaultValue={board?.originalPoster}
-                                ></input>
+                                ></textarea>
                                 <p style={{ fontSize: 12, color: "red" }}>{formErrors.originalPoster}</p>
 
                                 <label htmlFor="image">Image Link:</label>
@@ -207,11 +207,11 @@ export default function BoardDetails() {
                     </section> : ""}
                     {description ?
                         <ul>
-                            {description ? description.map(x =>
-                                <li key={x._id}><p>{x.owner}</p>
+                            {description.map(x =>
+                                <li style={{ color: 'green' }} className="desc" key={x._id}><p>{x.owner}</p>
                                     {x?.image !== "" ? <img src={x?.image} alt="wrongLink" width="150" height="150"></img> : ""}
                                     <p>{x?.comment}</p>{x.owner === user.username ? <button onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
-                            ) : ""}
+                            ) }
                         </ul> : ""} </div> : ""}
 
             {user.accessToken ?
@@ -220,13 +220,13 @@ export default function BoardDetails() {
                         <div className="container">
 
                             <label htmlFor="comment">Comment:</label>
-                            <input
+                            <textarea rows="4" cols="50"
                                 type="text"
                                 id="comment"
                                 name="comment"
                                 placeholder='Add new comment here'
                                 value={setFormValuesDesc.comment} onChange={handleChangeDesc}
-                            ></input>
+                            ></textarea>
                             <p style={{ fontSize: 12, color: "red" }}>{formErrorsDesc.comment}</p>
                             <label htmlFor="image">Image Link:</label>
                             <input

@@ -1,17 +1,19 @@
-### react-project-exam
+# react-project-exam
  simple exam project
-Headers
--------
+ includes everything it needs. It was uploaded in Git with node_module
+ cd client > npm start
+ cd server > npm start
+
 ## Architecture 
 - Client -React
 - Server - Express, taken online, had it's own very basic api authentication
 
-# Client Architecture
+## Client Architecture
 - react app
 - everything related to the app is in client/src
 - consists of components, css, js files
 
-# Server Architecture
+## Server Architecture
 - it is api server, only returns JSON
 - it is very basic, not for production use.
 
