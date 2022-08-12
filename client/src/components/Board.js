@@ -20,7 +20,7 @@ export default function Board({ board, deleting }) {
         deleting(board._id)
     }
    
-    
+    //thread setup that appears in the Catalog and My Threads
     return (
         <li className='boardCard'>
             {boardUser?<div style={{ fontSize: '15px' }} >Creator: {boardUser[0]?.username}</div>:<div>Loading...</div>}

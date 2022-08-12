@@ -13,6 +13,7 @@ export default function MyComics() {
   const { user } = useContext(Context);
   const id = user.id
   
+  //geting user's threads/boards
   useEffect(() => {
  
     boardService.getMy(id)
@@ -22,6 +23,7 @@ export default function MyComics() {
         });
 }, [id]);
 
+//delete function
 const deleting= async (id) => {
   await deleteOne(id)
   let newboards= boards.filter(x => !(x._id === id))

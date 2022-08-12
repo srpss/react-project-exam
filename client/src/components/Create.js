@@ -49,13 +49,13 @@ export default function Create() {
       console.log({error:error.message})
     }
   };
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormValues({ ...formValues, [name]: value })
 
   }
-
+  //validaiton functions, it only requires something to be added into the fields. it cannot be empty
   const validate = (values) => {
     const errors = {}
     if (!values?.originalPoster) {

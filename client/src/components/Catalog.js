@@ -17,7 +17,7 @@ export default function Catalog() {
         setBoards(result);
       });
   }, []);
-
+//deleting function, will delete the thread with the given id
   const deleting= async (id) => {
     await deleteOne(id)
     let newboards= boards.filter(x => !(x._id === id))
@@ -25,7 +25,6 @@ export default function Catalog() {
     setBoards(newboards)
     
 }
-
 
   return (
     <ul>

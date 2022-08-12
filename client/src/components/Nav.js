@@ -5,6 +5,7 @@ import { Context } from './context/Context';
 export default function Nav() {
     const { user } = useContext(Context)
 
+    //navigation bar setup with conditions based on logged user or guest
     return (
         <div className='nav'>
             <ul className="nav">

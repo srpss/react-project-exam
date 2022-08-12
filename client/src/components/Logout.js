@@ -9,7 +9,7 @@ export default function Logout() {
     const navigate = useNavigate();
     const { userLogout } = useContext(Context);
 
-   
+   //triggering logout which basically removes user localstorage data
     useEffect(() => { 
         userLogout();
         navigate('/');

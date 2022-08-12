@@ -5,7 +5,7 @@ import { deleteOne, getOne, getUser, updateDescription, editOne, deleteDesc } fr
 import { useNavigate, useParams } from 'react-router-dom';
 
 
-
+//this holds the thread details, meaning the comments of each thread are shown here. Only here you can see them and from here you can edit.
 
 export default function BoardDetails() {
     let [board, setBoard] = useState();
@@ -15,11 +15,14 @@ export default function BoardDetails() {
     const [stater, setStater] = useState(false)
     let { id } = useParams();
 
+    //validations for the edit of original thread
     const [formValues, setFormValues] = useState({ originalPoster: "", image: "" })
     const [formErrors, setFormErrors] = useState({})
     const [error, setError] = useState()
     let veri = ""
 
+    
+    //validation- for comments
     const [formValuesDesc, setFormValuesDesc] = useState({ comment: "", image: "" })
     const [formErrorsDesc, setFormErrorsDesc] = useState({})
     const [errorDesc, setErrorDesc] = useState()
@@ -27,6 +30,7 @@ export default function BoardDetails() {
 
     const navigate = useNavigate()
 
+    // this fetches the thread and sets it up in states. + sets the comments
     useEffect(() => {
         getOne(id).then(result => {
             setBoard(result);
@@ -43,7 +47,7 @@ export default function BoardDetails() {
     }, [board])
 
 
-
+// coments on submit. Called description, since it is all stored in description field. that is how i called it in a time
     const onSubmit = async (e) => {
         e.preventDefault();
 
@@ -79,6 +83,7 @@ export default function BoardDetails() {
         }
     };
 
+    //deltion functions for both thread and comments
     function deleteExecute() {
         deleting(board._id)
     }
@@ -130,6 +135,7 @@ export default function BoardDetails() {
         }
     };
 
+    // validations functions
     const handleChange = (e) => {
         const { name, value } = e.target
         setFormValues({ ...formValues, [name]: value })

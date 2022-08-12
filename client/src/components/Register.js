@@ -44,13 +44,13 @@ export default function Register() {
       console.log({ error: error.message })
     }
   }
-
+  //settinig values while they change from user input
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormValues({ ...formValues, [name]: value })
 
   }
-
+  //validaiton functions, it only requires something to be added into the fields. it cannot be empty
   const validate = (values) => {
     const errors = {}
     if (!values?.username) {

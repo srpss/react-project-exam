@@ -25,7 +25,7 @@ export default function Profile() {
       newState.username = profileData.username
       newState.image = profileData.image
       userLogin(newState)
-      //add change password
+    
       
     } catch (error) {
       console.log({error:error.message})
@@ -74,7 +74,7 @@ export default function Profile() {
           <input
             className="btn submit"
             type="submit"
-            value="Change them"
+            value="Update Profile"
           />
         </div>
       </form>
