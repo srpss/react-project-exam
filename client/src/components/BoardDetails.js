@@ -170,7 +170,7 @@ export default function BoardDetails() {
                     <div style={{ fontSize: '15px' }} >Last Update: {board.date}</div>
                     {board.image !== "" ? <img src={board.image} alt={board.image} width="150" height="150"></img> : ""}
                     <div className="op" style={{ color: 'green' }}  >{board.originalPoster}</div>
-                    {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}
+                    {board.owner === user.id ? <button className="delete" onClick={deleteExecute}>Delete</button> : ""}
                     {board.owner === user.id ? <section className="edit">
                         <form id="edit" onSubmit={onEdit}>
                             <div className="op">
@@ -211,7 +211,7 @@ export default function BoardDetails() {
                             {description.map(x =>
                                 <li  className="desc" key={x._id}><p>User: {x.owner}</p>
                                     {x?.image !== "" ? <img src={x?.image} alt="wrongLink" width="150" height="150"></img> : ""}
-                                    <p style={{ color: 'green' }}> {x?.comment}</p>{x.owner === user.username ? <button onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
+                                    <p style={{ color: 'green' }}> {x?.comment}</p>{x.owner === user.username ? <button  className="delete" onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
                             ) }
                         </ul> : ""} </div> : ""}
 

@@ -29,7 +29,7 @@ export default function Board({ board, deleting }) {
             {board.image !== ""?<img src={board.image} alt="boardImg" width="150" height="150"></img>:""}
             <div className="op" style={{ color: 'green' }}>{board.originalPoster}
            <p> <button onClick={details}>Details</button>
-            {board.owner === user.id ? <button onClick={deleteExecute}>Delete</button> : ""}</p></div>           
+            {board.owner === user.id ? <button className="delete" onClick={deleteExecute}>Delete</button> : ""}</p></div>           
 
          
         </li>
