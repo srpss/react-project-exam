@@ -111,19 +111,7 @@ app.post('/user-pass/:id', [authJwt.verifyToken], async (req, res) => {
     res.json({ error: error.message })
   }
 });
-// app.get('/my-user/:id', async (req, res) => {
-//   const id = req.params.id
-//   try {
-//     const boards = await boardsService.getMyUser(id).lean();
 
-//     res.json(boards );
-//   } catch (error) {
-//     res.json({error: error.message})
-//   }
-
-
-
-// });
 
 app.post('/boards/delete/:_id', async (req, res) => {
   try {
@@ -177,18 +165,19 @@ app.post('/boards/:id', async (req, res) => {
 });
 
 //delete description 
-app.get('/deleteBoardDesc/:id', async (req, res) => {
+app.get('/deleteBoardDesc/:treadId/:id', async (req, res) => {
+  
   try {
-   
-   
+ 
+    const treadId= req.params.treadId
     const id = {_id: req.params.id}
  
-    const board = await boardsService.deleteDesc(id).lean();
-    
-    const date = new Date()
-    const test= {date : date}
+    const board = await boardsService.deleteDesc(treadId,id).lean();
+  
+   // const date = new Date()
+   // const test= {date : date}
 
-    await boardsService.updateDate(id,test)
+   // await boardsService.updateDate(id,test)
 
     res.json(board);
   } catch (error) {

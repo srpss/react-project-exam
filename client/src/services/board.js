@@ -28,4 +28,4 @@ export const updateDescription = (_id, data) => request.post(`${baseUrl}/boards/
 
 export const editOne = (_id, data) => request.post(`${baseUrl}/boardsDetails/${_id}`, data)
 
-export const deleteDesc = (_id) => request.get(`${baseUrl}/deleteBoardDesc/${_id}`)
+export const deleteDesc = (threadID,_id) => request.get(`${baseUrl}/deleteBoardDesc/${threadID}/${_id}`)

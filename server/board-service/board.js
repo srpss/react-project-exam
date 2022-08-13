@@ -44,9 +44,12 @@ exports.updateBoardDetails = (id, data) => {
 }
 
 
-exports.deleteDesc = (id) => {
+exports.deleteDesc = (treadId, id) => {
 
-    return Board.updateOne( { },
-        { $pull: { description: { _id: id } } }
-      )
+    return Board.updateOne({_id: treadId },{$pull:{ description:{_id: id } 
+}} )
+//       return Board.deleteOne( { },
+//         { $pull: { description: { _id: id } } }
+//       )
+// }
 }

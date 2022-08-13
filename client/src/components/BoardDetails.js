@@ -91,11 +91,14 @@ export default function BoardDetails() {
         await deleteOne(id)
         navigate("/")
     }
-    function deleteDescr(id) {
-        deletingDescr(id)
+
+    function deleteDescr(threadId, id) {
+       
+        deletingDescr(threadId, id)
     }
-    const deletingDescr = async (id) => {
-        await deleteDesc(id)
+    const deletingDescr = async (threadId,id) => {
+        await deleteDesc(threadId, id)
+      
         setStater(!stater)
 
     }
@@ -217,7 +220,7 @@ export default function BoardDetails() {
                             {description.map(x =>
                                 <li  className="desc" key={x._id}><p>User: {x.owner}</p>
                                     {x?.image !== "" ? <img src={x?.image} alt="wrongLink" width="150" height="150"></img> : ""}
-                                    <p style={{ color: 'green' }}> {x?.comment}</p>{x.owner === user.username ? <button  className="delete" onClick={() => { deleteDescr(x._id) }}>Delete</button> : ""}</li>
+                                    <p style={{ color: 'green' }}> {x?.comment}</p>{x.owner === user.username ? <button  className="delete" onClick={() => { deleteDescr(board._id, x._id ) }}>Delete</button> : ""}</li>
                             ) }
                         </ul> : ""} </div> : ""}
 
